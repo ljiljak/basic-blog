@@ -1,0 +1,15 @@
+body {
+    font-size: 14px !important;
+    }
+
+nav {
+	background-color: #b34848 !important;
+}
+
+h2 {
+	color: #b34848 !important;
+}
+
+a, h2 {
+	text-decoration-color: #b34848 !important;
+}
