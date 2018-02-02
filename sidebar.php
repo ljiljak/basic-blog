@@ -1,5 +1,53 @@
 <aside class="col-sm-3 ml-sm-auto blog-sidebar">
             <div class="sidebar-module sidebar-module-inset">
+                <h4>Latest posts</h4>
+
+
+                <?php
+                include "db.php";
+    
+                $sql = "SELECT posts.Id, posts.Title FROM posts LIMIT 5";
+
+
+
+                $statement = $connection->prepare($sql);
+                $statement->execute();
+                $statement->setFetchMode(PDO::FETCH_ASSOC);
+                $posts = $statement->fetchAll();
+                
+                ?>
+
+            <?php
+
+            foreach ($posts as $post) { ?>
+                <p><a href="single-post.php?post_id=<?php echo($post['Id']) ?>"><?php echo($post['Title']) ?></a></p>
+            <?php
+            }
+
+            ?>
+                
+
+                   
+            
+
+
+
+
+
+
+
+            </div>
+            
+            
+        </aside><!-- /.blog-sidebar -->
+
+
+
+
+
+
+       <!--  <aside class="col-sm-3 ml-sm-auto blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
                 <h4>About</h4>
                 <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
             </div>
@@ -28,4 +76,4 @@
                     <li><a href="#">Facebook</a></li>
                 </ol>
             </div>
-        </aside><!-- /.blog-sidebar -->
+        </aside><! /.blog-sidebar -->
