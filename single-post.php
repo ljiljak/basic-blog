@@ -53,8 +53,22 @@
 
                 <p><?php echo($singlePost['Body']) ?></p>
 
-                <button id=button class="btn" onclick="myFunction()">Hide comments</button>
                 
+
+                <form action="send_post.php" method="post">
+                <p>Comments:</p>
+                <textarea rows="5" cols="50" name="post_contents"></textarea>
+                <p>Author:</p>
+                <input type="text" name="post_author">
+                <input type="submit">
+                </form>
+
+
+
+
+
+                <button id=button class="btn" onclick="myFunction()">Hide comments</button>
+
                 <div id="comments">
 
 
