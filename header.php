@@ -2,7 +2,7 @@
     <div class="blog-masthead">
         <div class="container">
             <nav class="nav">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active" href="index.php">Home</a>
                 <a class="nav-link" href="#">New features</a>
                 <a class="nav-link" href="#">Press</a>
                 <a class="nav-link" href="#">New hires</a>
@@ -17,4 +17,7 @@
             <p class="lead blog-description">An example blog template built with Bootstrap.</p>
         </div>
     </div>
+
+    <?php include 'db.php';?>
+
 </header>

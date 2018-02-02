@@ -1,4 +1,4 @@
-
+             
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
 
     <title>Vivify Blog</title>
 
@@ -17,6 +16,8 @@
 
     <!-- Custom styles for this template -->
     <link href="styles/blog.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+
 </head>
 
 <body>
@@ -29,70 +30,59 @@
 
         <div class="col-sm-8 blog-main">
 
-            <?php
-    // ako su mysql username/password i ime baze na vasim racunarima drugaciji
-    // obavezno ih ovde zamenite
-    $servername = "127.0.0.1";
-    $username = "root";
-    $password = "vivify";
-    $dbname = "blog";
-
-    try {
-        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-    catch(PDOException $e)
-    {
-        echo $e->getMessage();
-    }
-        // pripremamo upit
-        $sql = "SELECT Id, Title, Body, Author, Created_at FROM posts ORDER BY Created_at DESC LIMIT 3";
-        $statement = $connection->prepare($sql);
+            <div class="blog-post">
                 
-        // izvrsavamo upit
-        $statement->execute();
-                
-        // zelimo da se rezultat vrati kao asocijativni niz.
-        // ukoliko izostavimo ovu liniju, vratice nam se obican, numerisan niz
-        $statement->setFetchMode(PDO::FETCH_ASSOC);
-                
-        // punimo promenjivu sa rezultatom upita
-        $posts = $statement->fetchAll();
-                
-        // koristite var_dump kada god treba da proverite sadrzaj neke promenjive
-       
-
-?>
- <?php
-                foreach ($posts as $post) {
-            ?>
-             <div class="blog-post">
-
-               <h2 class="blog-post-title"><a href="/posts1.php"><?php echo($post['Title']) ?></a></h2>
-                <p class="blog-post-meta"><?php echo($post['Created_at']) ?> by <a href="#"><?php echo($post['Author']) ?></a></p>
-
-               <p><?php echo($post['Body']) ?></p>
-  </div><!-- /.blog-post -->
+                             <?php
+                include "db.php";
+                $post_id = $_GET['post_id'];
+                $sql = "SELECT posts.Id, posts.Title, posts.Body, posts.Author, posts.Created_at, comments.ID, comments.Author as Author_comment, comments.Text, comments.Post_id FROM posts INNER JOIN comments ON posts.Id = comments.Post_id WHERE posts.id = 1;";
 
 
-           <?php
-                }
-            ?>
+
+                $statement = $connection->prepare($sql);
+                $statement->execute();
+                $statement->setFetchMode(PDO::FETCH_ASSOC);
+                $singlePost = $statement->fetch();
+                // var_dump($singlePost);
+                ?>
+
+
+                <h2 class="blog-post-title"><a href="single-post.php?post_id=<?php echo($singlePost['Id']) ?>"><?php echo($singlePost['Title']) ?></a></h2>
+
+                <p class="blog-post-meta"><?php echo($singlePost['Created_at']) ?> by <a href="#"><?php echo($singlePost['Author']) ?></a></p>
+
+                <p><?php echo($singlePost['Body']) ?></p>
+
+                <p class="blog-post-meta"><?php echo('comments') ?> by <a href="#"><?php echo($singlePost['Author_comment']) ?></a></p>
+
+                <p><?php echo($singlePost['Text']) ?></p>
+
+           
         </div>
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary" href="#">Older</a>
+                <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+            </nav>
+            
+            </div><!-- /.blog-post -->
 
-<?php include 'sidebar.php' ?>
-</div>
-</main>
+            
 
+            
+
+            
+
+            <?php include 'sidebar.php' ?>
+
+        </div><!-- /.blog-main -->
+
+    
+
+    </div><!-- /.row -->
+
+</main><!-- /.container -->
 
 <?php include 'footer.php';?>
 
 </body>
 </html>
-
-
-  
-  
-
-

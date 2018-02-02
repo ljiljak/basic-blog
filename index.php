@@ -29,7 +29,7 @@
 
         <div class="col-sm-8 blog-main">
 
-            <?php include 'posts.php';?>
+            <?php include "posts.php"; ?>
 
             <nav class="blog-pagination">
                 <a class="btn btn-outline-primary" href="#">Older</a>
