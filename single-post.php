@@ -53,10 +53,18 @@
 
                 <p><?php echo($singlePost['Body']) ?></p>
 
-                <p class="blog-post-meta"><?php echo('comments') ?> by <a href="#"><?php echo($singlePost['Author_comment']) ?></a></p>
+                <button id=button class="btn" onclick="myFunction()">Hide comments</button>
+                
+                <div id="comments">
 
-                <p><?php echo($singlePost['Text']) ?></p>
 
+                    <p class="blog-post-meta"><?php echo('comments') ?> by <a href="#"><?php echo($singlePost['Author_comment']) ?></a></p>
+
+                    <p><?php echo($singlePost['Text']) ?></p>
+
+                    <script src="script.js"></script>
+
+                </div>
            
         </div>
             <nav class="blog-pagination">
@@ -83,6 +91,6 @@
 </main><!-- /.container -->
 
 <?php include 'footer.php';?>
-
+<script src="script.js"></script>
 </body>
 </html>
